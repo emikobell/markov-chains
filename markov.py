@@ -3,15 +3,6 @@
 from random import choice
 import sys
 
-# open file as big continuous string
-# put said string into list of words
-# loop through word list to add bigram pairs to chain dict as keys
-# add list of pos words as values to chain dict keys
-# take random key(link)
-# take word from said link join to empty new list
-# take last bigram from new trigram and search in dict
-# repeat until most current bigram dne in dict => keyerror
-
 
 def open_and_read_file(file_path1, file_path2 = None):
     """Take file path as string; return text as string.
@@ -26,10 +17,6 @@ def open_and_read_file(file_path1, file_path2 = None):
         whole_text = whole_text + text_2
 
     return whole_text
-
-
-# txt = open_and_read_file("green-eggs.txt")
-# type(txt)
 
 
 def make_chains(text_string):
