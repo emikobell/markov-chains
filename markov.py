@@ -84,14 +84,8 @@ def make_text(chains):
 
     chains_keys = list(chains.keys())
     capital_keys = [key for key in chains_keys if key[0][0].isupper()]
-                #[change this for everything in list if this]
-    # for key in chains_keys:
-    #     if key[0][0].isupper()
-    print(capital_keys)
-
-    # print(chains_keys)
     rand_key = choice(capital_keys)
-    # print(rand_key)
+
     while rand_key in chains_keys:
         words.extend(rand_key)
         next_word = choice(chains[rand_key])
@@ -101,7 +95,11 @@ def make_text(chains):
 
     return ' '.join(words)
 
+
+# Open the file and turn it into one long string
+
 input_path1 = sys.argv[1]
+
 if len(sys.argv) > 2:
     input_path2 = sys.argv[2]
     input_text = open_and_read_file(input_path1, input_path2)
@@ -109,13 +107,7 @@ else:
     input_text = open_and_read_file(input_path1)
 
 
-
-# Open the file and turn it into one long string
-# print(input_path)
-# input_text = open_and_read_file(input_path1, input_path2)
-
 # Get a Markov chain
-# print(input_text)
 chains = make_chains(input_text)
 
 # Produce random text
