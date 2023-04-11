@@ -1,6 +1,7 @@
 """Generate Markov text from text files."""
 
 from random import choice
+import sys
 
 # open file as big continuous string
 # put said string into list of words
@@ -12,14 +13,17 @@ from random import choice
 # repeat until most current bigram dne in dict => keyerror
 
 
-def open_and_read_file(file_path):
+def open_and_read_file(file_path1, file_path2 = None):
     """Take file path as string; return text as string.
 
     Takes a string that is a file path, opens the file, and turns
     the file's contents as one string of text.
     """
 
-    whole_text = open(file_path).read()
+    whole_text= open(file_path1).read()
+    if file_path2 != None:
+        text_2 = open(file_path2).read()
+        whole_text = whole_text + text_2
 
     return whole_text
 
@@ -76,8 +80,14 @@ def make_text(chains):
     words = []
 
     chains_keys = list(chains.keys())
+    capital_keys = [key for key in chains_keys if key[0][0].isupper()]
+                #[change this for everything in list if this]
+    # for key in chains_keys:
+    #     if key[0][0].isupper()
+    print(capital_keys)
+
     # print(chains_keys)
-    rand_key = choice(chains_keys)
+    rand_key = choice(capital_keys)
     # print(rand_key)
     while rand_key in chains_keys:
         words.extend(rand_key)
@@ -88,15 +98,25 @@ def make_text(chains):
 
     return ' '.join(words)
 
-input_path = 'gettysburg.txt'
+input_path1 = sys.argv[1]
+if len(sys.argv) > 2:
+    input_path2 = sys.argv[2]
+    input_text = open_and_read_file(input_path1, input_path2)
+else:
+    input_text = open_and_read_file(input_path1)
+
+
 
 # Open the file and turn it into one long string
-input_text = open_and_read_file(input_path)
+# print(input_path)
+# input_text = open_and_read_file(input_path1, input_path2)
 
 # Get a Markov chain
+# print(input_text)
 chains = make_chains(input_text)
 
 # Produce random text
 random_text = make_text(chains)
 
 print(random_text)
+
