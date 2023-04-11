@@ -50,12 +50,10 @@ def make_chains(text_string):
     
     for idx in range(len(words)-2):
 
-        if (words[idx], words[idx + 1]) not in chains:
-           chains[(words[idx], words[idx + 1])].append(words[idx + 2]) 
+        if (words[idx], words[idx + 1]) in chains:
+            chains[(words[idx], words[idx + 1])].append(words[idx + 2]) 
         else:
             chains[(words[idx], words[idx + 1])] = [words[idx + 2]]
-            
-            print("YAY")
 
     return chains
 
